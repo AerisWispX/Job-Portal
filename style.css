@@ -1,0 +1,177 @@
+/* Custom Properties */
+:root {
+    --sun-size: 120px;
+    --moon-size: 100px;
+    --sun-color: #FFD700;
+    --moon-color: #F4F6F0;
+    --background-day: #87CEEB;
+    --background-night: #1a1c25;
+  }
+  
+  /* 3D Background Styles */
+  .scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    perspective: 1000px;
+    overflow: hidden;
+  }
+  
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+  }
+  
+  /* Sun/Moon Styles */
+  .celestial-body {
+    position: fixed;
+    top: 100px;
+    right: 100px;
+    transition: transform 0.1s ease;
+    z-index: -1;
+  }
+  
+  .sun {
+    width: var(--sun-size);
+    height: var(--sun-size);
+    background: radial-gradient(circle at 30% 30%, var(--sun-color), #FFA500);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #FFD700;
+  }
+  
+  .sun .face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .sun .eyes {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .sun .eye {
+    width: 12px;
+    height: 12px;
+    background: #000;
+    border-radius: 50%;
+    transform-origin: center;
+    transition: transform 0.1s ease;
+  }
+  
+  .moon {
+    width: var(--moon-size);
+    height: var(--moon-size);
+    background: radial-gradient(circle at 30% 30%, var(--moon-color), #E0E0E0);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(244, 246, 240, 0.5);
+    display: none;
+  }
+  
+  .moon .face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .moon .eyes {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .moon .eye {
+    width: 10px;
+    height: 10px;
+    background: #2C3E50;
+    border-radius: 50%;
+    transform-origin: center;
+    transition: transform 0.1s ease;
+  }
+  
+  /* Fireworks Styles */
+  .firework {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+  }
+  
+  .spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: explode 0.8s ease-out forwards;
+  }
+  
+  @keyframes explode {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(var(--translateY)) translateX(var(--translateX)) scale(0);
+      opacity: 0;
+    }
+  }
+  
+  /* Theme Transition */
+  body {
+    transition: background-color 0.5s ease;
+  }
+  
+  body.dark-mode .sun {
+    display: none;
+  }
+  
+  body.dark-mode .moon {
+    display: block;
+  }
+  
+  /* Cracker Button */
+  .cracker-btn {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    padding: 1rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+  }
+  
+  .cracker-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    :root {
+      --sun-size: 80px;
+      --moon-size: 70px;
+    }
+    
+    .celestial-body {
+      top: 50px;
+      right: 50px;
+    }
+    
+    .cracker-btn {
+      right: 1rem;
+      font-size: 1.5rem;
+    }
+  }
